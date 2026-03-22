@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently --names \"API,VITE\" --prefix-colors \"yellow,cyan\" \"node server.js\" \"vite\"",
-    "server": "node server.js",
-    "client": "vite",
+    "dev": "node server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

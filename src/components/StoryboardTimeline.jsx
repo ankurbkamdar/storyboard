@@ -26,6 +26,7 @@ function SequenceViewIcon() {
 }
 
 export default function StoryboardTimeline({ scenes, onUpdateScene, onGenerateFrame, onGenerateAll, generatingAll }) {
+  const ungeneratedCount = scenes.filter(s => !s.frameUrl && !s.frameLoading).length;
   const [viewMode, setViewMode] = useState("cards");
 
   return (
@@ -57,15 +58,19 @@ export default function StoryboardTimeline({ scenes, onUpdateScene, onGenerateFr
           <button
             className="generate-all-btn"
             onClick={onGenerateAll}
-            disabled={generatingAll}
+            disabled={generatingAll || ungeneratedCount === 0}
           >
             {generatingAll ? (
               <>
                 <span className="btn-spinner" />
                 Generating...
               </>
+            ) : ungeneratedCount === 0 ? (
+              "All Generated"
+            ) : scenes.some(s => s.frameUrl) ? (
+              `Generate Next 5 (${ungeneratedCount} left)`
             ) : (
-              "Generate All Frames"
+              "Generate First 5"
             )}
           </button>
           <span className="timeline-count">{scenes.length} SCENES</span>

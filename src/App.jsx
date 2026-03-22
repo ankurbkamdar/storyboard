@@ -106,9 +106,13 @@ export default function App() {
 
   const generateAllFrames = async () => {
     setGeneratingAll(true);
-    for (let i = 0; i < scenes.length; i++) {
-      const scene = scenes[i];
-      const { prompt, style } = buildPrompt(scene);
+    const batch = scenes
+      .map((scene, i) => ({ scene, i }))
+      .filter(({ scene }) => !scene.frameUrl && !scene.frameLoading)
+      .slice(0, 5);
+    for (const { scene, i } of batch) {
+      const prompt = scene.imagePrompt || buildPrompt(scene).prompt;
+      const { style } = buildPrompt(scene);
       await generateFrame(i, prompt, style);
     }
     setGeneratingAll(false);

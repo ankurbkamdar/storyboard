@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import Anthropic from "@anthropic-ai/sdk";
 import express from "express";
-import cors from "cors";
+import { createServer as createViteServer } from "vite";
 
 // Load .env manually since dotenv v17 changed behavior
 const envFile = readFileSync(".env", "utf-8");
@@ -11,7 +11,6 @@ for (const line of envFile.split("\n")) {
 }
 
 const app = express();
-app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 
 const client = new Anthropic();
@@ -83,7 +82,6 @@ app.post("/api/generate-frame", async (req, res) => {
   }
 
   try {
-    // Start prediction
     const createRes = await fetch("https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions", {
       method: "POST",
       headers: {
@@ -109,7 +107,6 @@ app.post("/api/generate-frame", async (req, res) => {
 
     const prediction = await createRes.json();
 
-    // Poll until complete (Prefer: wait may still need polling in some cases)
     let result = prediction;
     const maxWait = 60;
     let waited = 0;
@@ -134,5 +131,12 @@ app.post("/api/generate-frame", async (req, res) => {
   }
 });
 
-const PORT = 3001;
+// Integrate Vite dev server as middleware — one port for everything
+const vite = await createViteServer({
+  server: { middlewareMode: true },
+  appType: "spa",
+});
+app.use(vite.middlewares);
+
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

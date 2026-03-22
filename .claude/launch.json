@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "storyboard",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["vite", "--port", "5173"],
-      "port": 5173
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 3001
     }
   ]
 }

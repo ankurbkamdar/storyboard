@@ -1,0 +1,59 @@
+:root {
+  --bg: #0a0a0f;
+  --bg-raised: #13131a;
+  --bg-card: #1a1a24;
+  --bg-input: #0e0e16;
+  --border: #2a2a3a;
+  --border-focus: #4a4a6a;
+  --text: #8a8a9a;
+  --text-bright: #e0e0ea;
+  --text-dim: #5a5a6a;
+  --accent: #c8a84e;
+  --accent-dim: rgba(200, 168, 78, 0.15);
+  --red: #e05050;
+  --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}

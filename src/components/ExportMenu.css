@@ -1,0 +1,94 @@
+.export-menu {
+  position: relative;
+}
+
+.export-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 7px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.export-btn:hover:not(:disabled) {
+  border-color: var(--text-dim);
+  color: var(--text-bright);
+}
+
+.export-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.export-spinner {
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid var(--border);
+  border-top-color: var(--text);
+  border-radius: 50%;
+  animation: exp-spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes exp-spin { to { transform: rotate(360deg); } }
+
+.export-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 200;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.export-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: left;
+}
+
+.export-option:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.export-option:hover {
+  background: var(--bg-raised);
+}
+
+.export-option svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.export-option-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-bright);
+  margin-bottom: 2px;
+}
+
+.export-option-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+}

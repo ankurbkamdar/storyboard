@@ -131,6 +131,11 @@ app.post("/api/generate-frame", async (req, res) => {
   }
 });
 
+// Catch-all for unmatched /api routes — always return JSON, never HTML
+app.use("/api", (req, res) => {
+  res.status(404).json({ error: `Unknown API route: ${req.method} ${req.path}` });
+});
+
 // Integrate Vite dev server as middleware — one port for everything
 const vite = await createViteServer({
   server: { middlewareMode: true },

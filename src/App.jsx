@@ -28,11 +28,12 @@ export default function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ script }),
       });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to parse script");
+      const text = await res.text();
+      let data;
+      try { data = JSON.parse(text); } catch {
+        throw new Error("Server unreachable — make sure you ran `npm run dev`");
       }
-      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to parse script");
       setScenes(
         data.map((s) => ({
           ...s,
@@ -85,11 +86,13 @@ export default function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
       });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Frame generation failed");
+      const text = await res.text();
+      let result;
+      try { result = JSON.parse(text); } catch {
+        throw new Error("Server unreachable — make sure you ran `npm run dev`");
       }
-      const { imageUrl } = await res.json();
+      if (!res.ok) throw new Error(result.error || "Frame generation failed");
+      const { imageUrl } = result;
       setScenes((prev) =>
         prev.map((s, i) =>
           i === index ? { ...s, frameLoading: false, frameUrl: imageUrl, frameStyle: style, frameStale: false } : s

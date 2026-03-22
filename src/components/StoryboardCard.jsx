@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FRAME_STYLES, buildPrompt } from "../App.jsx";
+import { FRAME_STYLES, buildPrompt } from "../utils/frameUtils.js";
 import ShotEditor from "./ShotEditor.jsx";
 import "./StoryboardCard.css";
 
@@ -41,7 +41,8 @@ export default function StoryboardCard({ scene, onUpdate, onGenerateFrame }) {
   const currentStyle = FRAME_STYLES[scene.frameStyle] || FRAME_STYLES.cinematic;
 
   const handleGenerate = () => {
-    const { prompt, style } = buildPrompt(scene);
+    const { style } = buildPrompt(scene);
+    const prompt = scene.imagePrompt || buildPrompt(scene).prompt;
     onGenerateFrame(prompt, style);
   };
 
@@ -159,12 +160,15 @@ export default function StoryboardCard({ scene, onUpdate, onGenerateFrame }) {
           onChange={(v) => onUpdate("movement", v)}
         />
 
-        {scene.imagePrompt && (
-          <div className="prompt-display">
-            <label>IMAGE PROMPT</label>
-            <p>{scene.imagePrompt}</p>
-          </div>
-        )}
+        <div className="prompt-display">
+          <label>IMAGE PROMPT</label>
+          <textarea
+            className="prompt-textarea"
+            value={scene.imagePrompt || buildPrompt(scene).prompt}
+            onChange={(e) => onUpdate("imagePrompt", e.target.value)}
+            rows={3}
+          />
+        </div>
 
         <div className="notes-section">
           <label>NOTES</label>

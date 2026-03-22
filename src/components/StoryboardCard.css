@@ -338,11 +338,26 @@
   margin-bottom: 4px;
 }
 
-.prompt-display p {
-  font-size: 11px;
-  line-height: 1.5;
+.prompt-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
   color: var(--text-dim);
+  font-size: 11px;
   font-style: italic;
+  line-height: 1.5;
+  padding: 6px 8px;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+
+.prompt-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  color: var(--text);
+  font-style: normal;
 }
 
 .card-description {

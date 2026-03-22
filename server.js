@@ -39,11 +39,17 @@ Return ONLY valid JSON — no markdown, no code fences, no explanation. The resp
     "slugline": "INT. LOCATION - TIME",
     "description": "Brief scene description",
     "characters": ["CHARACTER1", "CHARACTER2"],
+    "characterDescriptions": {
+      "CHARACTER1": "40s, tall woman with red hair, wearing a trench coat",
+      "CHARACTER2": "20s, nervous young man in a suit"
+    },
     "suggestedShot": "Wide",
     "suggestedAngle": "Eye Level",
     "suggestedMovement": "Static"
   }
 ]
+
+For characterDescriptions: always include every character from the "characters" array as a key. Extract their physical appearance (age, build, hair, clothing, notable features) from the screenplay. If no appearance details exist in the script, write a brief generic description based on their role/name. Keep each value concise (under 15 words).
 
 Valid shot types: Wide, Medium, Close-Up, Extreme Close-Up, POV, Over-the-Shoulder
 Valid angles: Eye Level, Low Angle, High Angle, Dutch Angle, Bird's Eye, Worm's Eye

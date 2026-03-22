@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { FRAME_STYLES } from "../App.jsx";
+import { FRAME_STYLES } from "../utils/frameUtils.js";
 import "./SequenceView.css";
 
 const TRANSITIONS = ["Cut", "Dissolve", "Fade to Black"];

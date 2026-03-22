@@ -23,7 +23,7 @@ export default function App() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/parse-script", {
+      const res = await fetch("/api/parse", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ script }),
